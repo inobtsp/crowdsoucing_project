@@ -5,11 +5,11 @@
         "en-US": {
           "summary": "Sample Short Description",
           "examplePhrases": [
-            "Alexa open hello world",
+            "Alexa open crowdsourcing",
             "hello",
             "help"
           ],
-          "name": "Hello World",
+          "name": "crowdsourcing platform",
           "description": "Sample Full Description"
         }
       },
@@ -22,7 +22,7 @@
       "custom": {
         "endpoint": {
           "sourceDir": "lambda/custom",
-          "uri": "ask-custom-helloworld-default"
+          "uri": "ask-custom-crowdsourcing_platform-default"
         }
       }
     },

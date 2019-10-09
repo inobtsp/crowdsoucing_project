@@ -8,26 +8,47 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
+        this.attributes['workername'] = '';
+        const speakOutput = 'Welcome come to crowdsoucing platform, sign in your name to do the following step!';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
             .getResponse();
     }
 };
-const HelloWorldIntentHandler = {
+const SignInIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'SignInIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Hello World!';
+       //var workersname =  ;
+       this.attributes['workername'] =this.event.request.intent.slots.workername.value ;
+       console.log(this.attributes['workername']);
+        const speakOutput = 'Welecome to crowdsoucing platform' + this.attributes['workername'];
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            //.reprompt('what do you want? Check task? Do task?')
             .getResponse();
     }
 };
+
+
+/*const CheckAvalibleIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'CheckAvalible';
+    },
+    handle(handlerInput) {
+        var workersname =  this.event.request.intent.slots.workername.value
+        const speakOutput = 'Welecome to crowdsoucing platform'+workersname ;
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt('what do you want? Check task? Do task?')
+            .getResponse();
+    }
+};
+*/
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -108,7 +129,8 @@ const ErrorHandler = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
-        HelloWorldIntentHandler,
+        SignInIntentHandler,
+        //CheckAvalibleIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
